@@ -22,3 +22,23 @@ class Payment(models.Model):
     class Meta:
         verbose_name = 'Оплата'
         verbose_name_plural = 'Оплата'
+
+
+class Discount(models.Model):
+    min_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Минимальная сумма')
+    max_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Максимальная сумма')
+    discount_percentage = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Процент скидки')
+
+    def __str__(self):
+        return f"Скидка {self.discount_percentage} на сумму от {self.min_price} до {self.max_price}"
+    
+    class Meta:
+        verbose_name = 'Скидка'
+        verbose_name_plural = 'Скидка'
+
+class Icon(models.Model):
+    icon = models.ImageField(upload_to='data/', verbose_name='Логотип')
+    description = models.CharField(max_length=100, verbose_name='Описание')
+
+    def __str__(self):
+        return self.description

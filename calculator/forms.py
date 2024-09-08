@@ -1,5 +1,5 @@
 from django import forms
-from .models import Goods_Fabric, Payment
+from .models import Goods_Fabric, Payment, Discount
 
 class CalculationForm(forms.Form):
     fabric = forms.ModelChoiceField(
@@ -27,9 +27,8 @@ class CalculationForm(forms.Form):
         label='Оплата',
         widget=forms.Select(attrs={'class': 'form-control'}))
 
-    discount = forms.DecimalField(
-        max_digits=5,
-        decimal_places=2,
-        label='Скидка (%)',
-        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Введите скидку в процентах'})
+    discount = forms.ModelChoiceField(
+        queryset=Discount.objects.all(),
+        label='Скидка',
+        widget=forms.Select(attrs={'class': 'form-control'})
     )

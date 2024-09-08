@@ -1,23 +1,10 @@
 from django.shortcuts import render
-from . forms import CalculationForm
+from .forms import CalculationForm
+from .models import Icon
 from django.http import JsonResponse
 
-def calculate_discount(total_amount):
-    if 1000 <= total_amount < 10000:
-        return 5
-    elif 10000 <= total_amount < 20000:
-        return 10
-    elif 20000 <= total_amount < 30000:
-        return 15
-    elif 30000 <= total_amount <40000:
-        return 17
-    elif 40000 <= total_amount < 50000:
-        return 20
-    
-    return 0
-    
-
 def calculator_view(request):
+    icon = Icon.objects.first()  # Получаем первую иконку, если она есть
     if request.method == 'POST':
         form = CalculationForm(request.POST)
         if form.is_valid():
@@ -25,19 +12,24 @@ def calculator_view(request):
             quadrature = form.cleaned_data['quadrature']
             installation = form.cleaned_data['installation']
             payment = form.cleaned_data['payment']
+            discount = form.cleaned_data['discount']
 
-            fabric_price = fabric.price if fabric else 0
-            total_amount = fabric_price * quadrature + installation
-            discount = calculate_discount(total_amount)
-            total_with_discount = total_amount * ((100 - discount) / 100)
-            final_amount = total_with_discount * ((100 + payment.percentage) / 100)
-            
+            total_amount = fabric.price * quadrature + installation
+            total_with_payment = total_amount * ((100 + payment.percentage) / 100)
+
+            if total_with_payment < discount.min_price or total_with_payment > discount.max_price:
+                return JsonResponse({
+                    'success': False,
+                    'error': f'Такая скидка непозволительно! Скидка для этой суммы: {discount.discount_percentage}%'
+                })
+
+            final_amount = total_with_payment * ((100 - discount.discount_percentage) / 100)
+
             data = {
                 'success': True,
-                'total_amount': total_amount,
-                'total_with_discount': total_with_discount,
+                'total_with_payment': total_with_payment,
                 'final_amount': final_amount,
-                'discount': discount,
+                'fabric_price': fabric.price,
             }
             return JsonResponse(data)
         
@@ -47,5 +39,6 @@ def calculator_view(request):
         form = CalculationForm()
 
     return render(request, 'calculator.html', {
-        'form': form
+        'form': form,
+        'icon': icon
     })
