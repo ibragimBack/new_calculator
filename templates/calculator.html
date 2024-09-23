@@ -57,25 +57,17 @@
 
             <div class="form-group">
                 <label for="{{ form.discount.id_for_label }}">Скидка</label>
-                <select name="{{ form.discount.name }}" id="{{ form.discount.id_for_label }}">
-                    <option value="" data-discount="0" data-min-price="0" data-max-price="0">-- Выберите скидку --</option>
-                    {% for discount in form.discount.field.queryset %}
-                        <option value="{{ discount.id }}" data-discount="{{ discount.discount_percentage }}" data-min-price="{{ discount.min_price }}" data-max-price="{{ discount.max_price }}">
-                            {{ discount.discount_percentage }}% на сумму от {{ discount.min_price }} до {{ discount.max_price }} сом
-                        </option>
-                    {% endfor %}
-                </select>
+                <input type="text" id="{{ form.discount.id_for_label }}" value="Акция {{ discount.discount }}%" class="form-control discount-field" data-discount="{{ discount.discount }}" readonly>
             </div>
 
-            <div id="error-message" style="color: red; font-weight: bold;"></div>
         </form>
     </div>
 
     <div class="result-container">
         <h1>Результаты</h1>
         <div class="result-content">
-            <p class="total-amount"></p> <!-- Общая сумма с оплатой -->
-            <p class="total-with-discount"></p> <!-- Сумма со скидкой -->
+            <p class="total-amount"></p>
+            <p class="total-with-discount"></p>
         </div>
     </div>
 </body>

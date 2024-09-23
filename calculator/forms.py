@@ -25,7 +25,8 @@ class CalculationForm(forms.Form):
     payment = forms.ModelChoiceField(
         queryset=Payment.objects.all(),
         label='Оплата',
-        widget=forms.Select(attrs={'class': 'form-control'}))
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
 
     discount = forms.ModelChoiceField(
         queryset=Discount.objects.all(),

@@ -1,113 +1,112 @@
 <style>
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f0f4f7;
+    color: #333;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-container, .result-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+}
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+.logo-container img {
+    max-width: 40px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.logo-container h1 {
+    color: #007BFF;
+    font-weight: 700;
+    margin: 0;
+    font-size: 1.2em;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+select, input[type="number"], input[type="text"], .discount-field {
+    padding: 12px;
+    width: calc(100% - 24px);
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+.price-display {
+    margin-top: 10px;
+    font-weight: 600;
+    color: #007BFF;
+}
+.result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.result-container h1 {
+    color: #007BFF;
+    font-weight: 700;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+.result-content {
+    margin-top: 10px;
+}
+.result-container p {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 600px) {
     body {
-        font-family: 'Nunito', sans-serif;
-        background-color: #f0f4f7;
-        color: #333;
-        padding: 10px;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        padding: 5px;
     }
     .form-container, .result-container {
-        background-color: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        max-width: 500px; /* Adjusted width */
-        width: 100%;
-        margin-bottom: 15px;
-    }
-    .header {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start; /* Переносит контент влево */
-        margin-bottom: 15px;
-    }
-    .logo-container {
-        display: flex;
-        align-items: center;
-    }
-    .logo-container img {
-        max-width: 40px;
-        border-radius: 10px;
-        margin-right: 10px; /* Добавляет отступ между логотипом и текстом */
-    }
-    .logo-container h1 {
-        color: #007BFF;
-        font-weight: 700;
+        padding: 10px;
         margin: 0;
-        font-size: 1.2em;
+        box-shadow: none;
+        max-width: 100%;
+    }
+    .header img {
+        max-width: 60px;
+    }
+    .header h1 {
+        font-size: 1.1em;
     }
     .form-group {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: 600;
+    select, input[type="number"], .discount-field {
+        font-size: 0.9em;
+        padding: 10px;
+        width: calc(100% - 20px);
     }
-    select, input[type="number"] {
-        padding: 12px; /* Increased padding */
-        width: calc(100% - 24px); /* Adjusted width */
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        box-sizing: border-box;
-        font-size: 1em; /* Consistent font size */
+    .price-display, .result-container p {
+        font-size: 0.9em;
     }
-    .price-display {
-        margin-top: 10px;
-        font-weight: 600;
-        color: #007BFF;
-    }
-    .result-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-    .result-container h1 {
-        color: #007BFF;
-        font-weight: 700;
-        font-size: 1.2em;
-        margin-bottom: 10px; /* Reduced margin */
-    }
-    .result-content {
-        margin-top: 10px; /* Reduced margin */
-    }
-    .result-container p {
-        font-weight: 600;
-        margin-bottom: 5px; /* Reduced margin */
-    }
-
-    /* Адаптивный дизайн для мобильных устройств */
-    @media (max-width: 600px) {
-        body {
-            padding: 5px;
-        }
-        .form-container, .result-container {
-            padding: 10px;
-            margin: 0;
-            box-shadow: none;
-            max-width: 100%; /* Adjusted width */
-        }
-        .header img {
-            max-width: 60px;
-        }
-        .header h1 {
-            font-size: 1.1em;
-        }
-        .form-group {
-            margin-bottom: 10px;
-        }
-        select, input[type="number"] {
-            font-size: 0.9em;
-            padding: 10px; /* Increased padding */
-            width: calc(100% - 20px); /* Adjusted width */
-        }
-        .price-display, .result-container p {
-            font-size: 0.9em;
-        }
-    }
+}
 </style>
