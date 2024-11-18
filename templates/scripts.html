@@ -1,44 +1,26 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const fabricSelect = document.getElementById('id_fabric');
-        const quadratureInput = document.getElementById('id_quadrature');
-        const installationInput = document.getElementById('id_installation');
+        const resultsInput = document.getElementById('id_results');
         const paymentSelect = document.getElementById('id_payment');
-        const priceDisplay = document.getElementById('fabric-price');
-        const totalAmountDisplay = document.querySelector('.total-amount');
-        const totalWithDiscountDisplay = document.querySelector('.total-with-discount');
-        
-        const discountField = document.getElementById('id_discount');
-        let discountPercentage = parseFloat(discountField.getAttribute('data-discount'));
-    
+        const totalWithPaymentDisplay = document.querySelector('.total-with-payment');
         function updatePrice() {
-            const selectedFabricOption = fabricSelect.options[fabricSelect.selectedIndex];
-            const fabricPrice = parseFloat(selectedFabricOption.getAttribute('data-price')) || 0;
-            const quadrature = parseFloat(quadratureInput.value) || 0;
-            const installation = parseFloat(installationInput.value) || 0;
+            const results = parseFloat(resultsInput.value) || 0;
             const selectedPaymentOption = paymentSelect.options[paymentSelect.selectedIndex];
             const paymentPercentage = parseFloat(selectedPaymentOption.getAttribute('data-percentage')) || 0;
-    
-            priceDisplay.textContent = `Цена ткани: ${fabricPrice.toFixed(2)} сом`;
-        
-            if (fabricSelect.value && quadrature > 0 && installation >= 0) {
-                const totalAmount = fabricPrice * quadrature + installation;
-                let finalAmount = totalAmount * ((100 + paymentPercentage) / 100);
-                
-                const totalWithDiscount = finalAmount * ((100 - discountPercentage) / 100);
-                totalWithDiscountDisplay.textContent = `Итого со скидкой: ${totalWithDiscount.toFixed(2)} сом`;
-                totalAmountDisplay.textContent = `Общая сумма: ${finalAmount.toFixed(2)} сом`;
+
+            if (results > 0) {
+                const totalWithPayment = results * ((100 + paymentPercentage) / 100);
+
+                totalWithPaymentDisplay.textContent = `Общая сумма: ${totalWithPayment.toFixed(2)} сом`;
             } else {
-                totalAmountDisplay.textContent = '';
+                totalWithPaymentDisplay.textContent = '';
                 totalWithDiscountDisplay.textContent = '';
             }
         }
-    
-        fabricSelect.addEventListener('change', updatePrice);
-        quadratureInput.addEventListener('input', updatePrice);
-        installationInput.addEventListener('input', updatePrice);
+
+        resultsInput.addEventListener('input', updatePrice);
         paymentSelect.addEventListener('change', updatePrice);
-        
+
         updatePrice();
     });
-    </script>
+</script>

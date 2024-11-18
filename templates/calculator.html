@@ -4,7 +4,6 @@
     <title>Калькулятор</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% include 'styles.html' %}
-    {% include 'scripts.html' %}
 </head>
 <body>
     <div class="form-container">
@@ -21,26 +20,8 @@
         <form method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="{{ form.fabric.id_for_label }}">Ткань</label>
-                <select name="{{ form.fabric.name }}" id="{{ form.fabric.id_for_label }}">
-                    <option value="" data-price="0">-- Выберите ткань --</option>
-                    {% for fabric in form.fabric.field.queryset %}
-                        <option value="{{ fabric.id }}" data-price="{{ fabric.price }}">
-                            {{ fabric.fabric }}
-                        </option>
-                    {% endfor %}
-                </select>
-                <div id="fabric-price" class="price-display"></div>
-            </div>
-
-            <div class="form-group">
-                <label for="{{ form.quadrature.id_for_label }}">Квадратура (м²)</label>
-                {{ form.quadrature }}
-            </div>
-
-            <div class="form-group">
-                <label for="{{ form.installation.id_for_label }}">Установка (сом)</label>
-                {{ form.installation }}
+                <label for="{{ form.results.id_for_label }}"> Cумма заказа (сом)</label>
+                {{ form.results }}
             </div>
 
             <div class="form-group">
@@ -55,20 +36,16 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="{{ form.discount.id_for_label }}">Скидка</label>
-                <input type="text" id="{{ form.discount.id_for_label }}" value="Акция {{ discount.discount }}%" class="form-control discount-field" data-discount="{{ discount.discount }}" readonly>
-            </div>
-
         </form>
     </div>
 
     <div class="result-container">
         <h1>Результаты</h1>
         <div class="result-content">
-            <p class="total-amount"></p>
-            <p class="total-with-discount"></p>
+            <h2 class="total-with-payment"></h2>
         </div>
     </div>
+
+    {% include 'scripts.html' %}
 </body>
 </html>
