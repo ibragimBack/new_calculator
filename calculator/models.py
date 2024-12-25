@@ -5,7 +5,7 @@ class Payment(models.Model):
     percentage = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Процент', default=0)
 
     def __str__(self):
-        return f"{self.payment} ({self.percentage}%)"
+        return self.payment
     
     class Meta:
         verbose_name = 'Оплата'
@@ -19,3 +19,9 @@ class Icon(models.Model):
     def __str__(self):
         return self.description
     
+
+class Term(models.Model):
+    term = models.IntegerField(verbose_name='Срок')
+
+    def __str__(self):
+        return f'{self.term} месяц'

@@ -20,32 +20,27 @@
         <form method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="{{ form.results.id_for_label }}"> Cумма заказа (сом)</label>
+                <label for="{{ form.results.id_for_label }}">Cумма заказа (сом)</label>
                 {{ form.results }}
             </div>
 
             <div class="form-group">
-                <label for="{{ form.payment.id_for_label }}">Оплата</label>
-                <select name="{{ form.payment.name }}" id="{{ form.payment.id_for_label }}">
-                    <option value="" data-percentage="0">-- Выберите способ оплаты --</option>
-                    {% for payment in form.payment.field.queryset %}
-                        <option value="{{ payment.id }}" data-percentage="{{ payment.percentage }}">
-                            {{ payment }}
-                        </option>
-                    {% endfor %}
-                </select>
+                <label for="{{ form.prepayment.id_for_label }}">Предоплата</label>
+                {{ form.prepayment }}
             </div>
 
+            <div class="form-group">
+                <label for="{{ form.payment.id_for_label }}">Оплата</label>
+                {{ form.payment }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.term.id_for_label }}">Срок</label>
+                {{ form.term }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Рассчитать</button>
         </form>
     </div>
-
-    <div class="result-container">
-        <h1>Результаты</h1>
-        <div class="result-content">
-            <h2 class="total-with-payment"></h2>
-        </div>
-    </div>
-
-    {% include 'scripts.html' %}
 </body>
 </html>

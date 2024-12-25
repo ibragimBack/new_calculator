@@ -1,6 +1,6 @@
 from typing import Any
 from django.contrib import admin
-from . models import Payment, Icon
+from . models import Payment, Icon, Term
 from django.contrib.auth.models import Group, User
 
 class IconAdmin(admin.ModelAdmin):
@@ -11,6 +11,7 @@ class IconAdmin(admin.ModelAdmin):
 
 admin.site.register(Payment)
 admin.site.register(Icon, IconAdmin)
+admin.site.register(Term)
 
 admin.site.unregister(Group)
 admin.site.unregister(User)
